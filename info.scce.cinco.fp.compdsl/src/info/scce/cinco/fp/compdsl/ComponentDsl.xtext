@@ -1,0 +1,10 @@
+grammar info.scce.cinco.fp.compdsl.ComponentDsl with org.eclipse.xtext.common.Terminals
+
+generate componentDsl "http://cinco.scce.info/fp/ComponentDsl"
+
+// TODO Define the Component DSL
+
+Model:
+	components+=Component*;
+	
+Component: name=ID;

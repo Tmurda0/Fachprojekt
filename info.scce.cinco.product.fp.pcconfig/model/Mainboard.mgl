@@ -1,0 +1,12 @@
+id info.scce.cinco.product.fp.pcconfig.mb.mgl
+stylePath "model/Configurator.style"
+
+// TODO Define the Mainboard model
+
+graphModel Mainboard {
+	diagramExtension "mb"	
+}
+
+node MainboardNode {
+	style simpleRectangle
+}

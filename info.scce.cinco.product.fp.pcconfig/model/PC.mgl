@@ -1,0 +1,12 @@
+id info.scce.cinco.product.fp.pcconfig.pc.mgl
+stylePath "model/Configurator.style"
+
+// TODO Define the PC model
+
+graphModel PC {
+	diagramExtension "pc"
+}
+
+node PCNode {
+	style simpleRectangle
+}
