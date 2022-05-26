@@ -27,8 +27,8 @@ CPU: 'CPU'  '{'
 RAM: 'RAM'  '{'
 	name=ID displayName=STRING cost=COST
 	power=INT
-	'}'
 	ramType=RamType
+	'}'
 ;
 Drive: 'Drive'  '{'
 	name=ID displayName=STRING cost=COST
