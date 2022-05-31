@@ -13,10 +13,15 @@ class GPUGenerator {
 		template.toString
 	}
 	
-	// TODO: Implement this template
 	def template() '''
-		«class» not implemented, yet!
-		---
-		«gpus.map[toString].join('\n')»
+		«gpus.map[
+			"GPU \"" + it.name + "\" {" + "\n" +
+			"\tDisplayName: " + "\"" + it.name + " (" + it.chip + ")" + "\"" + "\n" +
+			"\tPrice: " + it.price + "€" + "\n" +
+			"\tPowerUsage: " + it.powerConsumption + " W" +  "\n" +
+			"\tChip: " + "\"" + it.chip + "\"" + "\n" +
+			"\tMemory: " + it.memory + " GB" + "\n" +
+			"}"
+		].join('\n')»
 	'''
 }

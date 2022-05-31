@@ -13,10 +13,13 @@ class PowerSupplyGenerator {
 		template.toString
 	}
 	
-	// TODO: Implement this template
 	def template() '''
-		«class» not implemented, yet!
-		---
-		«supplies.map[toString].join('\n')»
+		«supplies.map[
+			"PSU \"" + it.name + "\" {" + "\n" +
+			"\tDisplayName: " + "\"" + it.name + "\"" + "\n" +
+			"\tPrice: " + it.price + "€" + "\n" +
+			"\tPowerSupplied: " + it.power + " W" +  "\n" +
+			"}"
+		].join('\n')»
 	'''
 }

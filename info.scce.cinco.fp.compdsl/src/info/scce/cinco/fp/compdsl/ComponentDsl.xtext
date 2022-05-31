@@ -9,60 +9,77 @@ Model:
 Generatable: Component | Type;
 
 
-Type: SocketType | RamType | FormFactor;
+Type: SocketType | RamType | FormFactor | DriveType;
 
 SocketType: 'SocketType' name=ID;
 RamType: 'RamType' name=ID;
+DriveType: 'DriveType' name=ID;
 FormFactor: 'FormFactor' name=ID;
 
 
-Component: Mainboard | CPU | RAM | Drive | Case | PSU;
+Component: Mainboard | CPU | RAM | Drive | Case | PSU | GPU;
 
-Mainboard: 'Mainboard' name=ID '{'
-	displayName=STRING 
-	cost=COST
-	power=POWER
-	socketType=[SocketType] 
-	ramType=[RamType] 
-	formFacor=[FormFactor]
+Mainboard: 'Mainboard' name=STRING '{'
+	"DisplayName" ":" displayName=STRING 
+	"Price" ":" price=PRICE
+	"PowerUsage" ":" power=POWER
+	"Chipset" ":" chipset=STRING
+	"MemorySlots" ":" memorySlots=NUMBER_FANCY
+	"PCIe16Slots" ":" PCIe16Slots=NUMBER_FANCY
+	"SataSlots" ":" sataSlots=NUMBER_FANCY
+	"SocketType" ":" socketType=[SocketType] 
+	"RamType" ":" ramType=[RamType] 
+	"FormFactor" ":" formFacor=[FormFactor]
 	'}'
 ;
 CPU: 'CPU' name=STRING '{'
-	displayName=STRING
-	cost=COST
-	power=POWER
-	socketType=[SocketType]
+	"DisplayName" ":" displayName=STRING
+	"Price" ":" price=PRICE
+	"PowerUsage" ":" power=POWER
+	"SocketType" ":" socketType=[SocketType]
+	'}'
+;
+GPU: 'GPU' name=STRING '{'
+	"DisplayName" ":" displayName=STRING
+	"Price" ":" price=PRICE
+	"PowerUsage" ":" power=POWER
+	"Chip" ":" chip=STRING
+	"Memory" ":" memory=MEMORY
 	'}'
 ;
 RAM: 'RAM' name=STRING  '{'
-	displayName=STRING
-	cost=COST
-	power=POWER
-	ramType=[RamType]
-	capacity=NUMBER_FANCY
+	"DisplayName" ":" displayName=STRING
+	"Price" ":" price=PRICE
+	"PowerUsage" ":" power=POWER
+	"RamType" ":" ramType=[RamType]
+	"Memory" ":" memory=MEMORY
 	'}'
 ;
 Drive: 'Drive' name=STRING '{'
-	displayName=STRING
-	cost=COST
-	power=POWER
+	"DisplayName" ":" displayName=STRING
+	"Price" ":" price=PRICE
+	"PowerUsage" ":" power=POWER
+	"Description" ":" description=STRING
+	"DriveType" ":" driveType=[DriveType]
 	'}'
 ;
 Case: 'Case' name=STRING '{'
-	displayName=STRING
-	cost=COST
-	formFacor=[FormFactor]
-	driveSlots=NUMBER_FANCY
+	"DisplayName" ":" displayName=STRING
+	"Price" ":" price=PRICE
+	"FormFactor" ":" formFacor=[FormFactor]
+	"ExternalDriveSlots" ":" externalSlots=NUMBER_FANCY
+	"InternalDriveSlots" ":" internalSlots=NUMBER_FANCY
 	'}'
 ;
 PSU: 'PSU' name=STRING '{'
-	displayName=STRING
-	cost=COST
-	power=POWER
+	"DisplayName" ":" displayName=STRING
+	"Price" ":" price=PRICE
+	"PowerSupplied" ":" power=POWER
 	'}'
 ;
 
 terminal POWER: NUMBER_FANCY ' ' 'W';
-terminal COST: (NUMBER_FANCY '.' ('0'..'9') ('0'..'9') '€');
+terminal PRICE: (NUMBER_FANCY '.' (('0'..'9') | (('0'..'9') ('0'..'9'))) '€');
+terminal MEMORY: NUMBER_FANCY ' ' 'GB';
 
 terminal NUMBER_FANCY: ((('1'..'9') ('0'..'9')*) | '0');

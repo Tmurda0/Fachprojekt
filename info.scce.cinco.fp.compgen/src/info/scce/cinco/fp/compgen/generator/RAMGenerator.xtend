@@ -22,11 +22,11 @@ class RAMGenerator {
 	def template() '''
 	«rams.map[
 		"RAM \"" + it.name + "\" {" + "\n" +
-		"\t" + "\"" + it.name + " (" + it.type.toString + ")" + "\"" + "\n" +
-		"\t" + it.price + "€" + "\n" +
-		"\t" + it.powerConsumption + " W" +  "\n" +
-		"\t" + it.type.toString + "\n" +
-		"\t" + it.capacity + "\n" +
+		"\tDisplayName: " + "\"" + it.name + " (" + it.type.toString + ")" + "\"" + "\n" +
+		"\tPrice: " + it.price + "€" + "\n" +
+		"\tPowerUsage: " + it.powerConsumption + " W" +  "\n" +
+		"\tRamType: " + it.type.toString + "\n" +
+		"\tMemory: " + it.capacity + " GB" + "\n" +
 		"}"
 	].join('\n')»
 	«ramTypes.map[
