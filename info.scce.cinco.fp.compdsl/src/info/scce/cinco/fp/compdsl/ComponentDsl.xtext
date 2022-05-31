@@ -18,8 +18,7 @@ FormFactor: 'FormFactor' name=ID;
 
 Component: Mainboard | CPU | RAM | Drive | Case | PSU;
 
-Mainboard: 'Mainboard'  '{'
-	name=ID 
+Mainboard: 'Mainboard' name=ID '{'
 	displayName=STRING 
 	cost=COST
 	power=POWER
@@ -28,39 +27,35 @@ Mainboard: 'Mainboard'  '{'
 	formFacor=[FormFactor]
 	'}'
 ;
-CPU: 'CPU'  '{'
-	name=ID
+CPU: 'CPU' name=STRING '{'
 	displayName=STRING
 	cost=COST
 	power=POWER
 	socketType=[SocketType]
 	'}'
 ;
-RAM: 'RAM'  '{'
-	name=ID 
+RAM: 'RAM' name=STRING  '{'
 	displayName=STRING
 	cost=COST
 	power=POWER
 	ramType=[RamType]
+	capacity=NUMBER_FANCY
 	'}'
 ;
-Drive: 'Drive'  '{'
-	name=ID
+Drive: 'Drive' name=STRING '{'
 	displayName=STRING
 	cost=COST
 	power=POWER
 	'}'
 ;
-Case: 'Case'  '{'
-	name=ID
+Case: 'Case' name=STRING '{'
 	displayName=STRING
 	cost=COST
 	formFacor=[FormFactor]
 	driveSlots=NUMBER_FANCY
 	'}'
 ;
-PSU: 'PSU' '{'
-	name=ID
+PSU: 'PSU' name=STRING '{'
 	displayName=STRING
 	cost=COST
 	power=POWER
