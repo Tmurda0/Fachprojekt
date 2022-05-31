@@ -3,54 +3,71 @@ grammar info.scce.cinco.fp.compdsl.ComponentDsl with org.eclipse.xtext.common.Te
 generate componentDsl "http://cinco.scce.info/fp/ComponentDsl"
 
 Model:
-	components+=Component*
-	types+=Type*
+	generated += Generatable*
 ;
 
-	
-Component: Mainboard | CPU | RAM | Drive | Case | PSU;
+Generatable: Component | Type;
 
-Mainboard: 'Mainboard'  '{'
-	name=ID displayName=STRING cost=COST
-	power=INT
-	socketType=SocketType 
-	ramType=RamType 
-	formFacor=FormFactor
-	'}'
-;
-CPU: 'CPU'  '{'
-	name=ID displayName=STRING cost=COST
-	power=INT
-	socketType=SocketType
-	'}'
-;
-RAM: 'RAM'  '{'
-	name=ID displayName=STRING cost=COST
-	power=INT
-	ramType=RamType
-	'}'
-;
-Drive: 'Drive'  '{'
-	name=ID displayName=STRING cost=COST
-	power=INT
-	'}'
-;
-Case: 'Case'  '{'
-	name=ID displayName=STRING cost=COST
-	formFacor=FormFactor
-	driveSlots=INT
-	'}'
-;
-PSU: 'PSU' '{'
-	name=ID displayName=STRING cost=COST
-	power=INT
-	'}'
-;
 
 Type: SocketType | RamType | FormFactor;
+
 SocketType: 'SocketType' name=ID;
 RamType: 'RamType' name=ID;
 FormFactor: 'FormFactor' name=ID;
 
 
-terminal COST: INT '.' ('0'..'9') ('0'..'9') '€';
+Component: Mainboard | CPU | RAM | Drive | Case | PSU;
+
+Mainboard: 'Mainboard'  '{'
+	name=ID 
+	displayName=STRING 
+	cost=COST
+	power=POWER
+	socketType=[SocketType] 
+	ramType=[RamType] 
+	formFacor=[FormFactor]
+	'}'
+;
+CPU: 'CPU'  '{'
+	name=ID
+	displayName=STRING
+	cost=COST
+	power=POWER
+	socketType=[SocketType]
+	'}'
+;
+RAM: 'RAM'  '{'
+	name=ID 
+	displayName=STRING
+	cost=COST
+	power=POWER
+	ramType=[RamType]
+	'}'
+;
+Drive: 'Drive'  '{'
+	name=ID
+	displayName=STRING
+	cost=COST
+	power=POWER
+	'}'
+;
+Case: 'Case'  '{'
+	name=ID
+	displayName=STRING
+	cost=COST
+	formFacor=[FormFactor]
+	driveSlots=NUMBER_FANCY
+	'}'
+;
+PSU: 'PSU' '{'
+	name=ID
+	displayName=STRING
+	cost=COST
+	power=POWER
+	'}'
+;
+
+terminal POWER: NUMBER_FANCY ' ' 'W';
+terminal COST: (NUMBER_FANCY '.' ('0'..'9') ('0'..'9') '€');
+
+terminal NUMBER_FANCY: ((('1'..'9') ('0'..'9')*) | '0');
