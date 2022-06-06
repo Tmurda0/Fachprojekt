@@ -1,12 +1,16 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: info.scce.cinco.product.fp.pcconfig
+Bundle-Name: %pluginName
 Bundle-SymbolicName: info.scce.cinco.product.fp.pcconfig;singleton:=true
+Automatic-Module-Name: info.scce.cinco.product.fp.pcconfig
 Bundle-Version: 1.0.0
+Bundle-ClassPath: .
+Bundle-Vendor: %providerName
+Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-11
-Require-Bundle:  org.eclipse.emf.ecore,
+Require-Bundle: org.eclipse.emf.ecore;visibility:=reexport,
  de.jabc.cinco.meta.util,
- de.jabc.cinco.meta.core.mgl.model,
+ de.jabc.cinco.meta.core.mgl.model;visibility:=reexport,
  de.jabc.cinco.meta.core.ge.style.model,
  de.jabc.cinco.meta.core.ge.style.generator.runtime,
  de.jabc.cinco.meta.core.utils,
@@ -18,4 +22,29 @@ Require-Bundle:  org.eclipse.emf.ecore,
  org.eclipse.jface,
  org.eclipse.core.resources,
  org.eclipse.emf.transaction,
- info.scce.cinco.fp.compdsl
+ info.scce.cinco.fp.compdsl;visibility:=reexport,
+ de.jabc.cinco.meta.libraries,
+ org.eclipse.xtend.typesystem.emf,
+ org.eclipse.emf.ecore.xmi
+Bundle-ActivationPolicy: lazy
+Export-Package: info.scce.cinco.product.fp.pcconfig.pc.mgl.factory,info.
+ scce.cinco.product.fp.pcconfig.pc.mgl.adapter,info.scce.cinco.product.f
+ p.pcconfig.mb.mgl.factory,info.scce.cinco.product.fp.pcconfig.mb.mgl.ad
+ apter,info.scce.cinco.product.fp.pcconfig.mb.mgl.mainboard,info.scce.ci
+ nco.product.fp.pcconfig.mb.mgl.mainboard.impl,info.scce.cinco.product.f
+ p.pcconfig.mb.mgl.mainboard.internal,info.scce.cinco.product.fp.pcconfi
+ g.mb.mgl.mainboard.internal.impl,info.scce.cinco.product.fp.pcconfig.mb
+ .mgl.mainboard.internal.util,info.scce.cinco.product.fp.pcconfig.mb.mgl
+ .mainboard.util,info.scce.cinco.product.fp.pcconfig.mb.mgl.mainboard.vi
+ ews,info.scce.cinco.product.fp.pcconfig.mb.mgl.mainboard.views.impl,inf
+ o.scce.cinco.product.fp.pcconfig.mb.mgl.mainboard.views.util,info.scce.
+ cinco.product.fp.pcconfig.pc.mgl.pc,info.scce.cinco.product.fp.pcconfig
+ .pc.mgl.pc.impl,info.scce.cinco.product.fp.pcconfig.pc.mgl.pc.internal,
+ info.scce.cinco.product.fp.pcconfig.pc.mgl.pc.internal.impl,info.scce.c
+ inco.product.fp.pcconfig.pc.mgl.pc.internal.util,info.scce.cinco.produc
+ t.fp.pcconfig.pc.mgl.pc.util,info.scce.cinco.product.fp.pcconfig.pc.mgl
+ .pc.views,info.scce.cinco.product.fp.pcconfig.pc.mgl.pc.views.impl,info
+ .scce.cinco.product.fp.pcconfig.pc.mgl.pc.views.util,info.scce.cinco.pr
+ oduct.fp.pcconfig.perspective
+Bundle-Activator: info.scce.cinco.product.fp.pcconfig.Activator
+
