@@ -29,18 +29,18 @@ class Generator extends CincoRuntimeBaseClass implements IGenerator<PC> {
 	      <body>
 	        <h1>Configuration</h1>
 	        <table>
-	        «pc.PSUNodes.get(0).psuPrime.toString»
+	          <tr><td>«pc.PSUNodes.get(0).psuPrime.toString»</td></tr>
 	          «FOR node : pc.driveNodes»
 	            <tr> 
 	            <td>A</td>
 	            <td>Drive</td>
 	            </tr>
 	          «ENDFOR»
-	          --------------------------------------
-	          Total Cost: «cost» €
 	        </table>
-	      </body>
-	    </html>
+	 	--------------------------------------
+	 	Total Cost: «cost» €
+	 </body>
+	 </html>
 
 	'''
 	
