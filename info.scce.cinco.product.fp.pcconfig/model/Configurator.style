@@ -10,3 +10,50 @@ nodeStyle simpleRectangle {
 	}
 }
 
+nodeStyle caseStyle {
+	image {
+		size (400, 400)
+		path ("src/case.png")
+	}
+}
+
+nodeStyle mainboardStyle {
+	rectangle {
+		appearance {
+			background (255, 0, 0)
+		}
+		size (180, 180)
+	}
+}
+
+nodeStyle driveStyle {
+	rectangle {
+		appearance {
+			background (0, 255, 0)
+		}
+		size (180, 30)
+	}
+}
+
+nodeStyle psuStyle {
+	rectangle {
+		appearance {
+			background (0, 0, 255)
+		}
+		size (180, 90)
+	}
+}
+
+nodeStyle textStyle(1) {
+	rectangle {
+		appearance {
+			transparency 1.0
+			font ("Sans", 20)
+		}
+		size (200, 30)
+		text {
+			position (CENTER, MIDDLE)
+			value "%s"
+		}
+	}
+}
