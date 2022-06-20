@@ -1,12 +1,121 @@
+import "platform:/resource/info.scce.cinco.fp.compdsl/model/generated/ComponentDsl.ecore" as comp
+import "model/Mainboard.mgl" as mainboard
+
 id info.scce.cinco.product.fp.pcconfig.pc.mgl
 stylePath "model/Configurator.style"
 
 // TODO Define the PC model
 
+@generatable("info.scce.cinco.product.fp.pcconfig.generator.Generator", "configuration-gen")
+@primeviewer
+@postCreate("info.scce.cinco.product.fp.pcconfig.hooks.pc.PostCreatePC")
 graphModel PC {
 	diagramExtension "pc"
+	containableElements(PCNode[0,1], PriceNode[1,1], PowerNode[1,1])
 }
 
-node PCNode {
+@disable(resize)
+@postCreate("info.scce.cinco.product.fp.pcconfig.hooks.pc.PostCreatePCNode")
+container PCNode {
+	style caseStyle
+	
+	@pvFileExtension("comp")
+	@pvLabel(name)
+	prime comp.Case as PCcase
+	
+	containableElements(
+		PrimeMainboardNodeContainer[1,1], 
+		DriveNodeContainer[0,*], PSUNodeContainer[1,1]
+	)
+	
+	incomingEdges(*[0,0])
+	outgoingEdges(*[0,0])
+}
+
+
+
+@disable(resize, create, delete, move, select)
+container PrimeMainboardNodeContainer {
 	style simpleRectangle
+	
+	containableElements(PrimeMainboardNode[0,1])
+	
+	incomingEdges(*[0,0])
+	outgoingEdges(*[0,0])
+}
+
+@disable(resize)
+node PrimeMainboardNode {
+	style mainboardStyle
+	
+	prime mainboard::MainboardNode as mainboardPrime
+	
+	incomingEdges(*[0,0])
+	outgoingEdges(*[0,0])
+}
+
+
+@disable(resize, create, delete, move, select)
+container DriveNodeContainer {
+	style simpleRectangle
+	
+	containableElements(DriveNode[0,1])
+	
+	incomingEdges(*[0,0])
+	outgoingEdges(*[0,0])
+}
+
+@disable(resize)
+@postMove("info.scce.cinco.product.fp.pcconfig.hooks.pc.PostMoveDriveNode")
+@postCreate("info.scce.cinco.product.fp.pcconfig.hooks.pc.PostCreateDriveNode")
+node DriveNode {
+	style driveStyle
+	
+	@pvFileExtension("comp")
+	@pvLabel(name)
+	prime comp.Drive as drivePrime
+	
+	incomingEdges(*[0,0])
+	outgoingEdges(*[0,0])
+}
+
+
+@disable(resize, create, delete, move, select)
+container PSUNodeContainer {
+	style simpleRectangle
+	
+	containableElements(PSUNode[0,1])
+	
+	incomingEdges(*[0,0])
+	outgoingEdges(*[0,0])
+}
+
+@disable(resize)
+@postMove("info.scce.cinco.product.fp.pcconfig.hooks.pc.PostMovePSUNode")
+@postCreate("info.scce.cinco.product.fp.pcconfig.hooks.pc.PostCreatePSUNode")
+node PSUNode {
+	style psuStyle
+	
+	@pvFileExtension("comp")
+	@pvLabel(name)
+	prime comp.PSU as psuPrime
+	
+	incomingEdges(*[0,0])
+	outgoingEdges(*[0,0])
+}
+
+@disable(resize, create, delete, move, select)
+node PriceNode {
+	style textStyle("0.00 €")
+	
+	incomingEdges(*[0,0])
+	outgoingEdges(*[0,0])
+}
+
+@disable(resize, create, delete, move, select)
+node PowerNode {
+	style textStyle("0 W")
+	
+	incomingEdges(*[0,0])
+	outgoingEdges(*[0,0])
 }

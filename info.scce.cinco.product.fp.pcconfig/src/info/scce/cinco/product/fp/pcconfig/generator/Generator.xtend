@@ -29,8 +29,8 @@ class Generator extends CincoRuntimeBaseClass implements IGenerator<PC> {
 	      <body>
 	        <h1>Configuration</h1>
 	        <table>
-	          <tr><td>«pc.PSUNodes.get(0).psuPrime.toString»</td></tr>
-	          «FOR node : pc.driveNodes»
+	          <tr><td>«pc.PSUNodeContainers.get(0).PSUNodes.get(0).psuPrime.toString»</td></tr>
+	          «FOR node : pc.driveNodeContainers»
 	            <tr> 
 	            <td>A</td>
 	            <td>Drive</td>
