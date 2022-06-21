@@ -22,11 +22,11 @@ Component: Mainboard | CPU | RAM | Drive | Case | PSU | GPU;
 Mainboard: 'Mainboard' name=STRING '{'
 	"DisplayName" ":" displayName=STRING 
 	"Price" ":" price=PRICE
-	"PowerUsage" ":" power=POWER
+	"PowerUsage" ":" power=INT
 	"Chipset" ":" chipset=STRING
-	"MemorySlots" ":" memorySlots=NUMBER_FANCY
-	"PCIe16Slots" ":" PCIe16Slots=NUMBER_FANCY
-	"SataSlots" ":" sataSlots=NUMBER_FANCY
+	"MemorySlots" ":" memorySlots=INT
+	"PCIe16Slots" ":" PCIe16Slots=INT
+	"SataSlots" ":" sataSlots=INT
 	"SocketType" ":" socketType=[SocketType] 
 	"RamType" ":" ramType=[RamType] 
 	"FormFactor" ":" formFacor=[FormFactor]
@@ -35,30 +35,30 @@ Mainboard: 'Mainboard' name=STRING '{'
 CPU: 'CPU' name=STRING '{'
 	"DisplayName" ":" displayName=STRING
 	"Price" ":" price=PRICE
-	"PowerUsage" ":" power=POWER
+	"PowerUsage" ":" power=INT
 	"SocketType" ":" socketType=[SocketType]
 	'}'
 ;
 GPU: 'GPU' name=STRING '{'
 	"DisplayName" ":" displayName=STRING
 	"Price" ":" price=PRICE
-	"PowerUsage" ":" power=POWER
+	"PowerUsage" ":" power=INT
 	"Chip" ":" chip=STRING
-	"Memory" ":" memory=MEMORY
+	"Memory" ":" memory=INT
 	'}'
 ;
 RAM: 'RAM' name=STRING  '{'
 	"DisplayName" ":" displayName=STRING
 	"Price" ":" price=PRICE
-	"PowerUsage" ":" power=POWER
+	"PowerUsage" ":" power=INT
 	"RamType" ":" ramType=[RamType]
-	"Memory" ":" memory=MEMORY
+	"Memory" ":" memory=INT
 	'}'
 ;
 Drive: 'Drive' name=STRING '{'
 	"DisplayName" ":" displayName=STRING
 	"Price" ":" price=PRICE
-	"PowerUsage" ":" power=POWER
+	"PowerUsage" ":" power=INT
 	"Description" ":" description=STRING
 	"DriveType" ":" driveType=[DriveType]
 	'}'
@@ -67,19 +67,15 @@ Case: 'Case' name=STRING '{'
 	"DisplayName" ":" displayName=STRING
 	"Price" ":" price=PRICE
 	"FormFactor" ":" formFacor=[FormFactor]
-	"ExternalDriveSlots" ":" externalSlots=NUMBER_FANCY
-	"InternalDriveSlots" ":" internalSlots=NUMBER_FANCY
+	"ExternalDriveSlots" ":" externalSlots=INT
+	"InternalDriveSlots" ":" internalSlots=INT
 	'}'
 ;
 PSU: 'PSU' name=STRING '{'
 	"DisplayName" ":" displayName=STRING
 	"Price" ":" price=PRICE
-	"PowerSupplied" ":" power=POWER
+	"PowerSupplied" ":" power=INT
 	'}'
 ;
 
-terminal POWER: NUMBER_FANCY ' ' 'W';
-terminal PRICE: (NUMBER_FANCY '.' (('0'..'9') | (('0'..'9') ('0'..'9'))) '€');
-terminal MEMORY: NUMBER_FANCY ' ' 'GB';
-
-terminal NUMBER_FANCY: ((('1'..'9') ('0'..'9')*) | '0');
+terminal PRICE: (INT '.' (('0'..'9') | (('0'..'9') ('0'..'9'))));
