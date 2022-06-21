@@ -16,12 +16,27 @@ Require-Bundle: org.eclipse.emf.ecore;visibility:=reexport,de.jabc.cinco
  re.runtime,de.jabc.cinco.meta.core.ge.style,org.eclipse.jface,org.eclip
  se.core.resources,org.eclipse.emf.transaction,info.scce.cinco.fp.compds
  l;visibility:=reexport,de.jabc.cinco.meta.libraries,org.eclipse.xtend.t
- ypesystem.emf,org.eclipse.emf.ecore.xmi,de.jabc.cinco.meta.plugin.gener
- ator.runtime;bundle-version="2.0.1",de.jabc.cinco.meta.plugin.generator
- .runtime,de.jabc.cinco.meta.plugin.generator.runtime,de.jabc.cinco.meta
- .plugin.generator.runtime,de.jabc.cinco.meta.plugin.generator.runtime,d
- e.jabc.cinco.meta.plugin.generator.runtime,de.jabc.cinco.meta.plugin.ge
- nerator.runtime
+ ypesystem.emf,org.eclipse.emf.ecore.xmi;visibility:=reexport,de.jabc.ci
+ nco.meta.plugin.generator.runtime;bundle-version="2.0.1",de.jabc.cinco.
+ meta.plugin.generator.runtime,de.jabc.cinco.meta.plugin.generator.runti
+ me,de.jabc.cinco.meta.plugin.generator.runtime,de.jabc.cinco.meta.plugi
+ n.generator.runtime,de.jabc.cinco.meta.plugin.generator.runtime,de.jabc
+ .cinco.meta.plugin.generator.runtime,de.jabc.cinco.meta.plugin.generato
+ r.runtime,de.jabc.cinco.meta.plugin.generator.runtime,de.jabc.cinco.met
+ a.plugin.generator.runtime,de.jabc.cinco.meta.plugin.generator.runtime,
+ de.jabc.cinco.meta.plugin.generator.runtime,de.jabc.cinco.meta.plugin.g
+ enerator.runtime,de.jabc.cinco.meta.plugin.generator.runtime,de.jabc.ci
+ nco.meta.plugin.generator.runtime,de.jabc.cinco.meta.plugin.generator.r
+ untime,de.jabc.cinco.meta.plugin.generator.runtime,de.jabc.cinco.meta.p
+ lugin.generator.runtime,de.jabc.cinco.meta.plugin.generator.runtime,de.
+ jabc.cinco.meta.plugin.generator.runtime,de.jabc.cinco.meta.plugin.gene
+ rator.runtime,de.jabc.cinco.meta.plugin.generator.runtime,de.jabc.cinco
+ .meta.plugin.generator.runtime,de.jabc.cinco.meta.plugin.generator.runt
+ ime,de.jabc.cinco.meta.plugin.generator.runtime,de.jabc.cinco.meta.plug
+ in.generator.runtime,de.jabc.cinco.meta.plugin.generator.runtime,de.jab
+ c.cinco.meta.plugin.generator.runtime,de.jabc.cinco.meta.plugin.generat
+ or.runtime,de.jabc.cinco.meta.plugin.generator.runtime,de.jabc.cinco.me
+ ta.plugin.generator.runtime
 Bundle-ActivationPolicy: lazy
 Export-Package: info.scce.cinco.product.fp.pcconfig,info.scce.cinco.prod
  uct.fp.pcconfig.mb.mgl.adapter,info.scce.cinco.product.fp.pcconfig.mb.m
@@ -42,6 +57,7 @@ Export-Package: info.scce.cinco.product.fp.pcconfig,info.scce.cinco.prod
  cce.cinco.product.fp.pcconfig.pc.mgl.pc.views,info.scce.cinco.product.f
  p.pcconfig.pc.mgl.pc.views.impl,info.scce.cinco.product.fp.pcconfig.pc.
  mgl.pc.views.util,info.scce.cinco.product.fp.pcconfig.perspective,info.
- scce.cinco.product.fp.pcconfig.generator
+ scce.cinco.product.fp.pcconfig.generator,info.scce.cinco.product.fp.pcc
+ onfig.hooks
 Bundle-Activator: info.scce.cinco.product.fp.pcconfig.Activator
 
