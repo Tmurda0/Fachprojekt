@@ -58,6 +58,6 @@ Export-Package: info.scce.cinco.product.fp.pcconfig,info.scce.cinco.prod
  p.pcconfig.pc.mgl.pc.views.impl,info.scce.cinco.product.fp.pcconfig.pc.
  mgl.pc.views.util,info.scce.cinco.product.fp.pcconfig.perspective,info.
  scce.cinco.product.fp.pcconfig.generator,info.scce.cinco.product.fp.pcc
- onfig.hooks
+ onfig.hooks,info.scce.cinco.product.fp.pcconfig.hooks.pc
 Bundle-Activator: info.scce.cinco.product.fp.pcconfig.Activator
 
