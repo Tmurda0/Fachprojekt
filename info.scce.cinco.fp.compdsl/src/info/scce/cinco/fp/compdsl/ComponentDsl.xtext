@@ -29,7 +29,7 @@ Mainboard: 'Mainboard' name=STRING '{'
 	"SataSlots" ":" sataSlots=INT
 	"SocketType" ":" socketType=[SocketType] 
 	"RamType" ":" ramType=[RamType] 
-	"FormFactor" ":" formFacor=[FormFactor]
+	"FormFactor" ":" formFactor=[FormFactor]
 	'}'
 ;
 CPU: 'CPU' name=STRING '{'
@@ -66,7 +66,7 @@ Drive: 'Drive' name=STRING '{'
 Case: 'Case' name=STRING '{'
 	"DisplayName" ":" displayName=STRING
 	"Price" ":" price=PRICE
-	"FormFactor" ":" formFacor=[FormFactor]
+	"FormFactor" ":" formFactor=[FormFactor]
 	"ExternalDriveSlots" ":" externalSlots=INT
 	"InternalDriveSlots" ":" internalSlots=INT
 	'}'

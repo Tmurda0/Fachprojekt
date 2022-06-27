@@ -10,6 +10,20 @@ nodeStyle simpleRectangle {
 	}
 }
 
+nodeStyle containerStyle(1) {
+	rectangle {
+		appearance {
+			lineWidth 2
+			background (229,229,229)
+			font ("Sans", 20)
+		}
+		text {
+			position (CENTER, MIDDLE)
+			value "%s"
+		}
+	}
+}
+
 nodeStyle caseStyle {
 	image {
 		size (400, 400)

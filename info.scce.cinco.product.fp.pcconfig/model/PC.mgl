@@ -4,10 +4,11 @@ import "model/Mainboard.mgl" as mainboard
 id info.scce.cinco.product.fp.pcconfig.pc.mgl
 stylePath "model/Configurator.style"
 
-// TODO Define the PC model
-
 @generatable("info.scce.cinco.product.fp.pcconfig.generator.Generator", "configuration-gen")
 @primeviewer
+@mcam("check")
+@mcam_checkmodule("info.scce.cinco.product.fp.pcconfig.checks.pc.PowerCheck")
+@mcam_checkmodule("info.scce.cinco.product.fp.pcconfig.checks.pc.MainboardTypeCheck")
 @postCreate("info.scce.cinco.product.fp.pcconfig.hooks.pc.PostCreatePC")
 graphModel PC {
 	diagramExtension "pc"
@@ -37,7 +38,7 @@ container PCNode {
 
 @disable(resize, create, delete, move, select)
 container PrimeMainboardNodeContainer {
-	style simpleRectangle
+	style containerStyle("Mainboard")
 	
 	containableElements(PrimeMainboardNode[0,1])
 	
@@ -60,7 +61,7 @@ node PrimeMainboardNode {
 
 @disable(resize, create, delete, move, select)
 container DriveNodeContainer {
-	style simpleRectangle
+	style containerStyle("Drive")
 	
 	containableElements(DriveNode[0,1])
 	
@@ -86,7 +87,7 @@ node DriveNode {
 
 @disable(resize, create, delete, move, select)
 container PSUNodeContainer {
-	style simpleRectangle
+	style containerStyle("PSU")
 	
 	containableElements(PSUNode[0,1])
 	
