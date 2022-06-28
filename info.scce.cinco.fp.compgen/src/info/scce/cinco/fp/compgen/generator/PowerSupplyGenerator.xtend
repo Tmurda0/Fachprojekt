@@ -17,8 +17,8 @@ class PowerSupplyGenerator {
 		«supplies.map[
 			"PSU \"" + it.name + "\" {" + "\n" +
 			"\tDisplayName: " + "\"" + it.name + "\"" + "\n" +
-			"\tPrice: " + it.price + "€" + "\n" +
-			"\tPowerSupplied: " + it.power + " W" +  "\n" +
+			"\tPrice: " + it.price + "\n" +
+			"\tPowerSupplied: " + it.power +  "\n" +
 			"}"
 		].join('\n')»
 	'''

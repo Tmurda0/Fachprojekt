@@ -30,8 +30,8 @@ class MainboardGenerator {
 		«mainboards.map[
 			"Mainboard \"" + it.name + "\" {" + "\n" +
 			"\tDisplayName: " + "\"" + it.name + " (" + it.formFactor.toString + ")" + "\"" + "\n" +
-			"\tPrice: " + it.price + "€" + "\n" +
-			"\tPowerUsage: " + it.powerConsumption + " W" +  "\n" +
+			"\tPrice: " + it.price + "\n" +
+			"\tPowerUsage: " + it.powerConsumption + "\n" +
 			"\tChipset: " + "\"" + it.chipset + "\"" + "\n" +
 			"\tMemorySlots: " + it.numMemorySlots + "\n" +
 			"\tPCIe16Slots: " + it.numPCIe16Slots + "\n" +

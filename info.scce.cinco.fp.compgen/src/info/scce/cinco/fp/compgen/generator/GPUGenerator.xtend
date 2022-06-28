@@ -17,10 +17,10 @@ class GPUGenerator {
 		«gpus.map[
 			"GPU \"" + it.name + "\" {" + "\n" +
 			"\tDisplayName: " + "\"" + it.name + " (" + it.chip + ")" + "\"" + "\n" +
-			"\tPrice: " + it.price + "€" + "\n" +
-			"\tPowerUsage: " + it.powerConsumption + " W" +  "\n" +
+			"\tPrice: " + it.price + "\n" +
+			"\tPowerUsage: " + it.powerConsumption + "\n" +
 			"\tChip: " + "\"" + it.chip + "\"" + "\n" +
-			"\tMemory: " + it.memory + " GB" + "\n" +
+			"\tMemory: " + it.memory + "\n" +
 			"}"
 		].join('\n')»
 	'''

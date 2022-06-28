@@ -23,10 +23,10 @@ class RAMGenerator {
 	«rams.map[
 		"RAM \"" + it.name + "\" {" + "\n" +
 		"\tDisplayName: " + "\"" + it.name + " (" + it.type.toString + ")" + "\"" + "\n" +
-		"\tPrice: " + it.price + "€" + "\n" +
-		"\tPowerUsage: " + it.powerConsumption + " W" +  "\n" +
+		"\tPrice: " + it.price + "\n" +
+		"\tPowerUsage: " + it.powerConsumption +  "\n" +
 		"\tRamType: " + it.type.toString + "\n" +
-		"\tMemory: " + it.capacity + " GB" + "\n" +
+		"\tMemory: " + it.capacity + "\n" +
 		"}"
 	].join('\n')»
 	«ramTypes.map[

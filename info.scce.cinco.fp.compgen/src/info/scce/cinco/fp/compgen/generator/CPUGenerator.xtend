@@ -23,8 +23,8 @@ class CPUGenerator {
 		«cpus.map[
 			"CPU \"" + it.name + "\" {" + "\n" +
 			"\tDisplayName: " + "\"" + it.name + " (" + it.type + ")" + "\"" + "\n" +
-			"\tPrice: " + it.price + "€" + "\n" +
-			"\tPowerUsage: " + it.powerConsumption + " W" +  "\n" +
+			"\tPrice: " + it.price + "\n" +
+			"\tPowerUsage: " + it.powerConsumption +  "\n" +
 			"\tSocketType: " + it.socket.toString + "\n" +
 			"}"
 		].join('\n')»

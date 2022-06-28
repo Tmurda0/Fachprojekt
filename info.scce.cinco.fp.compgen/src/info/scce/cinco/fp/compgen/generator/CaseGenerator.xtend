@@ -23,7 +23,7 @@ class CaseGenerator {
 		«cases.map[
 			"Case \"" + it.name + "\" {" + "\n" +
 			"\tDisplayName: " + "\"" + it.name + " (" + it.formFactor.toString + ")" + "\"" + "\n" +
-			"\tPrice: " + it.price + "€" + "\n" +
+			"\tPrice: " + it.price + "\n" +
 			"\tFormFactor: " + it.formFactor + "\n" +
 			"\tExternalDriveSlots: " + it.externalSlots + "\n" +
 			"\tInternalDriveSlots: " + it.internalSlots + "\n" +
