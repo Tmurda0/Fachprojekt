@@ -1,12 +1,100 @@
+import "platform:/resource/info.scce.cinco.fp.compdsl/model/generated/ComponentDsl.ecore" as mbcomp
 id info.scce.cinco.product.fp.pcconfig.mb.mgl
 stylePath "model/Configurator.style"
 
 // TODO Define the Mainboard model
 
+@primeviewer
+@postCreate("info.scce.cinco.product.fp.pcconfig.hooks.mb.PostCreateMB")
 graphModel Mainboard {
-	diagramExtension "mb"	
+	diagramExtension "mb"
+	containableElements(MainboardNode[1,1])
 }
 
-node MainboardNode {
-	style simpleRectangle
+@disable(resize)
+//@postCreate("")
+//@preDelete("")
+container MainboardNode {
+	style mainboardStyle
+	
+	@pvFileExtension("comp")
+	@pvLabel(name)
+	prime mbcomp.Mainboard as mbprime
+	
+	containableElements(
+		CPUNodeContainer[1,1], RAMNodeContainer[1,*]
+	)
+	
+	incomingEdges(*[0,0])
+	outgoingEdges(*[0,0])
 }
+
+@disable(resize, create, delete, move, select)
+container CPUNodeContainer {
+	style containerStyle("CPU")
+	
+	containableElements(CPUNode[0,1])
+	
+	incomingEdges(*[0,0])
+	outgoingEdges(*[0,0])
+}
+
+@disable(resize)
+//@postMove("")
+//@postCreate("")
+//@preDelete("")
+node CPUNode {
+	style driveStyle
+	
+	@pvFileExtension("comp")
+	@pvLabel(name)
+	prime mbcomp.CPU as cpuprime
+	
+	incomingEdges(*[0,0])
+	outgoingEdges(*[0,0])
+}
+
+@disable(resize, create, delete, move, select)
+container RAMNodeContainer {
+	style containerStyle("RAM")
+	
+	containableElements(RAMNode[0,1])
+	
+	incomingEdges(*[0,0])
+	outgoingEdges(*[0,0])
+}
+
+@disable(resize)
+//@postMove("")
+//@postCreate("")
+//@preDelete("")
+node RAMNode {
+	style driveStyle
+	
+	@pvFileExtension("comp")
+	@pvLabel(name)
+	prime mbcomp.RAM as ramPrime
+	
+	incomingEdges(*[0,0])
+	outgoingEdges(*[0,0])
+}
+// Wenn benötig wird einfach dekomment
+/* @disable(resize, create, delete, move, select)
+node PriceNode {
+	style textStyle("Price: ${price} €")
+	
+	attr EDouble as price
+	
+	incomingEdges(*[0,0])
+	outgoingEdges(*[0,0])
+}
+
+@disable(resize, create, delete, move, select)
+node PowerNode {
+	style textStyle("Available Power: ${power} W")
+	
+	attr EInt as power
+	
+	incomingEdges(*[0,0])
+	outgoingEdges(*[0,0])
+}*/
