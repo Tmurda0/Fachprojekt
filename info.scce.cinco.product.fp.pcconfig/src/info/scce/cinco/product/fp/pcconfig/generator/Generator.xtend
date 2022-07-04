@@ -16,6 +16,8 @@ import info.scce.cinco.fp.compdsl.componentDsl.Mainboard
 import info.scce.cinco.product.fp.pcconfig.pc.mgl.pc.PrimeMainboardNodeContainer
 import info.scce.cinco.product.fp.pcconfig.pc.mgl.pc.DriveNodeContainer
 import info.scce.cinco.fp.compdsl.componentDsl.Drive
+import info.scce.cinco.product.fp.pcconfig.pc.mgl.pc.PSUNode
+import info.scce.cinco.product.fp.pcconfig.pc.mgl.pc.DriveNode
 
 class Generator extends CincoRuntimeBaseClass implements IGenerator<PC> {
 	
@@ -34,7 +36,7 @@ class Generator extends CincoRuntimeBaseClass implements IGenerator<PC> {
 		if(model.PCNodes.size==0){
 			'''Select components to generate a componentlist!'''
 		} else {
-			val pc = model.PCNodes.get(0)
+			val pc = model.findThe(PCNode)
 			'''
 			 <html>
 			 <head><meta charset="utf-8"/></head>
@@ -43,10 +45,10 @@ class Generator extends CincoRuntimeBaseClass implements IGenerator<PC> {
 			 <h1>Configuration</h1>
 			 <table>
 			        «caseRow(pc.PCcase as Case)»
-			        «psuRow(pc.PSUNodeContainers)»
-			        «mainboardRow(pc.primeMainboardNodeContainers)»
-			        «FOR driveContainer : pc.driveNodeContainers»
-			        	«driveRow(driveContainer)»
+			        «psuRow(pc.findThe(PSUNode))»
+			        «mainboardRow(pc.findThe(PrimeMainboardNode))»
+			        «FOR driveNode : pc.find(DriveNode)»
+			        	«driveRow(driveNode)»
 			        «ENDFOR»
 			 		<tr><td>-----------------------------------------------------</td><td>--------------</td></tr>
 			 		<tr><td>Total Cost:</td> <td>«Math.round(cost * 100.0) / 100.0» €</td></tr>
@@ -57,33 +59,30 @@ class Generator extends CincoRuntimeBaseClass implements IGenerator<PC> {
 		}
 	}
 	
-	def driveRow(DriveNodeContainer driveCon) {
-		if(driveCon.driveNodes.size > 0) {
-			val drive = driveCon.driveNodes.get(0).drivePrime as Drive
-			cost += Double.parseDouble(drive.price)
-			'''<tr><td>«drive.displayName»</td> <td>«drive.price» €</td></tr>'''
-		}
-	}
-	
-	def psuRow(EList<PSUNodeContainer> psuConts) {
-		if(psuConts.size > 0 && psuConts.get(0).PSUNodes.size > 0) {
-			val psu = psuConts.get(0).PSUNodes.get(0).psuPrime as PSU
-			cost += Double.parseDouble(psu.price)
-			'''<tr><td>«psu.displayName»</td> <td>«psu.price» €</td></tr>'''
-		}
-	}
-	def mainboardRow(EList<PrimeMainboardNodeContainer> mainboardConts) { //TODO implement search for components inside the mainboard
-		if(mainboardConts.size > 0 && mainboardConts.get(0).primeMainboardNodes.size > 0) {
-			val mainboard = mainboardConts.get(0).primeMainboardNodes.get(0).mainboardPrime as Mainboard
-			cost += Double.parseDouble(mainboard.price)
-			'''<tr><td>«mainboard.displayName»</td> <td>«mainboard.price» €</td></tr>'''
-		}
-	}
 	def caseRow(Case pcCase) {
 		if(pcCase !== null){
 			cost += Double.parseDouble(pcCase.price)
 			'''<tr><td>«pcCase.displayName»</td> <td>«pcCase.price» €</td></tr>'''
 		}
+	}
+	def psuRow(PSUNode psuNode) {
+		if(psuNode !== null){
+			val psuPrime = psuNode.psuPrime as PSU
+			cost += Double.parseDouble(psuPrime.price)
+			'''<tr><td>«psuPrime.displayName»</td> <td>«psuPrime.price» €</td></tr>'''
+		}
+	}
+	def mainboardRow(PrimeMainboardNode primeMainboardNode) { //TODO implement search for components inside the mainboard
+		if(primeMainboardNode !== null){
+			val mainboardPrime = primeMainboardNode.mainboardPrime as info.scce.cinco.product.fp.pcconfig.mb.mgl.mainboard.Mainboard
+			cost += Double.parseDouble("100.11")
+			'''<tr><td>«"Mainboard"»</td> <td>«"100.11"» €</td></tr>'''
+		}
+	}
+	def driveRow(DriveNode driveNode) {
+		val drive = driveNode.drivePrime as Drive
+		cost += Double.parseDouble(drive.price)
+		'''<tr><td>«drive.displayName»</td> <td>«drive.price» €</td></tr>'''
 	}
 	
 }

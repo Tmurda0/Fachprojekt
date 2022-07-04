@@ -9,6 +9,7 @@ stylePath "model/Configurator.style"
 @mcam("check")
 @mcam_checkmodule("info.scce.cinco.product.fp.pcconfig.checks.pc.PowerCheck")
 @mcam_checkmodule("info.scce.cinco.product.fp.pcconfig.checks.pc.MainboardTypeCheck")
+@mcam_checkmodule("info.scce.cinco.product.fp.pcconfig.checks.pc.MainboardSataAmountCheck")
 @postCreate("info.scce.cinco.product.fp.pcconfig.hooks.pc.PostCreatePC")
 graphModel PC {
 	diagramExtension "pc"
@@ -47,12 +48,13 @@ container PrimeMainboardNodeContainer {
 }
 
 @disable(resize)
+@postMove("info.scce.cinco.product.fp.pcconfig.hooks.pc.PostMovePrimeMainboardNode")
 @postCreate("info.scce.cinco.product.fp.pcconfig.hooks.pc.PostCreatePrimeMainboardNode")
 @preDelete("info.scce.cinco.product.fp.pcconfig.hooks.pc.PreDeletePrimeMainboardNode")
 node PrimeMainboardNode {
 	style mainboardStyle
 	
-	prime mainboard::MainboardNode as mainboardPrime
+	prime mainboard::Mainboard as mainboardPrime
 	
 	incomingEdges(*[0,0])
 	outgoingEdges(*[0,0])
@@ -74,7 +76,7 @@ container DriveNodeContainer {
 @postCreate("info.scce.cinco.product.fp.pcconfig.hooks.pc.PostCreateDriveNode")
 @preDelete("info.scce.cinco.product.fp.pcconfig.hooks.pc.PreDeleteDriveNode")
 node DriveNode {
-	style driveStyle
+	style driveStyle("${drivePrime.displayName}")
 	
 	@pvFileExtension("comp")
 	@pvLabel(name)
@@ -100,7 +102,7 @@ container PSUNodeContainer {
 @postCreate("info.scce.cinco.product.fp.pcconfig.hooks.pc.PostCreatePSUNode")
 @preDelete("info.scce.cinco.product.fp.pcconfig.hooks.pc.PreDeletePSUNode")
 node PSUNode {
-	style psuStyle
+	style psuStyle("${psuPrime.displayName}")
 	
 	@pvFileExtension("comp")
 	@pvLabel(name)
