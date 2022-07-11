@@ -11,6 +11,7 @@ stylePath "model/Configurator.style"
 @mcam_checkmodule("info.scce.cinco.product.fp.pcconfig.checks.pc.MainboardTypeCheck")
 @mcam_checkmodule("info.scce.cinco.product.fp.pcconfig.checks.pc.MainboardSataAmountCheck")
 @postCreate("info.scce.cinco.product.fp.pcconfig.hooks.pc.PostCreatePC")
+//@postSave("info.scce.cinco.product.fp.pcconfig.hooks.pc.PostSavePC")
 graphModel PC {
 	diagramExtension "pc"
 	containableElements(PCNode[0,1], PriceNode[1,1], PowerNode[1,1])
@@ -51,10 +52,10 @@ container PrimeMainboardNodeContainer {
 @postMove("info.scce.cinco.product.fp.pcconfig.hooks.pc.PostMovePrimeMainboardNode")
 @postCreate("info.scce.cinco.product.fp.pcconfig.hooks.pc.PostCreatePrimeMainboardNode")
 @preDelete("info.scce.cinco.product.fp.pcconfig.hooks.pc.PreDeletePrimeMainboardNode")
+@postSelect("info.scce.cinco.product.fp.pcconfig.hooks.pc.PostSelectPrimeMainboardNode")
 node PrimeMainboardNode {
 	style smallRedSquareStyle("Mainboard")
 	
-	@pvFileExtension("mb")
 	prime mainboardMgl::Mainboard as mainboardPrime
 	
 	incomingEdges(*[0,0])

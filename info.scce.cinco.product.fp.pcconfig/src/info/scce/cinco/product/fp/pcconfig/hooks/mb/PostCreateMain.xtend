@@ -7,6 +7,7 @@ class PostCreateMain extends CincoPostCreateHook<Mainboard> {
 	
 	override postCreate(Mainboard mb) {
 		mb.newPriceNode(0,0)
+		mb.newPowerNode(0,30)
 	}
 	
 }

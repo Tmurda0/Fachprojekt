@@ -3,6 +3,7 @@ import info.scce.cinco.fp.compdsl.componentDsl.Mainboard
 import info.scce.cinco.product.fp.pcconfig.mb.mgl.mainboard.MainboardNode
 import de.jabc.cinco.meta.runtime.hook.CincoPostCreateHook
 import info.scce.cinco.product.fp.pcconfig.mb.mgl.mainboard.PriceNode
+import info.scce.cinco.product.fp.pcconfig.mb.mgl.mainboard.PowerNode
 
 class PostCreateMBNode extends CincoPostCreateHook<MainboardNode> {
 	override postCreate(MainboardNode mbNode) {
@@ -20,6 +21,9 @@ class PostCreateMBNode extends CincoPostCreateHook<MainboardNode> {
 		val priceNodeView = mbNode.container.findThe(PriceNode).priceNodeView
 		
 		priceNodeView.price = Math.round((priceNodeView.price +  Double.parseDouble(mb.price)) * 100.0)/100.0
+			
+    	val powerNode = mbNode.container.findThe(PowerNode)
+		powerNode.power = powerNode.power +  mb.power
 	}
 	
 }
