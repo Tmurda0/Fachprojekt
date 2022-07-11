@@ -5,6 +5,7 @@ import info.scce.cinco.product.fp.pcconfig.pc.mgl.pc.PC
 import info.scce.cinco.product.fp.pcconfig.pc.mgl.pc.PrimeMainboardNode
 import info.scce.cinco.product.fp.pcconfig.mb.mgl.mainboard.Mainboard
 import info.scce.cinco.product.fp.pcconfig.pc.mgl.pc.DriveNode
+import info.scce.cinco.product.fp.pcconfig.mb.mgl.mainboard.MainboardNode
 
 class MainboardSataAmountCheck extends PCCheck {
 	/*
@@ -17,7 +18,10 @@ class MainboardSataAmountCheck extends PCCheck {
 		
 		val mainboardPrime = model.findThe(PrimeMainboardNode)
 		if(mainboardPrime !== null){
-			sataAmountAvailable = 5 //(mainboardPrime.mainboardPrime as Mainboard) TODO add Mainboard support
+			val dslMainboard = (mainboardPrime.mainboardPrime as Mainboard).findThe(MainboardNode)
+			if(dslMainboard !== null) {
+			sataAmountAvailable = (dslMainboard.mbprime as info.scce.cinco.fp.compdsl.componentDsl.Mainboard).sataSlots
+			}
 		}
 		
 		if(sataAmountAvailable < sataAmountNeeded){

@@ -1,5 +1,5 @@
 import "platform:/resource/info.scce.cinco.fp.compdsl/model/generated/ComponentDsl.ecore" as comp
-import "model/Mainboard.mgl" as mainboard
+import "model/Mainboard.mgl" as mainboardMgl
 
 id info.scce.cinco.product.fp.pcconfig.pc.mgl
 stylePath "model/Configurator.style"
@@ -54,7 +54,8 @@ container PrimeMainboardNodeContainer {
 node PrimeMainboardNode {
 	style mainboardStyle
 	
-	prime mainboard::Mainboard as mainboardPrime
+	@pvFileExtension("mb")
+	prime mainboardMgl::Mainboard as mainboardPrime
 	
 	incomingEdges(*[0,0])
 	outgoingEdges(*[0,0])
