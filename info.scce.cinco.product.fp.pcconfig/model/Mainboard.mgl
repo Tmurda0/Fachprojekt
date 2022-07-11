@@ -2,27 +2,26 @@ import "platform:/resource/info.scce.cinco.fp.compdsl/model/generated/ComponentD
 id info.scce.cinco.product.fp.pcconfig.mb.mgl
 stylePath "model/Configurator.style"
 
-// TODO Define the Mainboard model
 
 @primeviewer
 @postCreate("info.scce.cinco.product.fp.pcconfig.hooks.mb.PostCreateMain")
 graphModel Mainboard {
 	diagramExtension "mb"
-	containableElements(MainboardNode[1,1], PriceNode[1,1])
+	containableElements(MainboardNode[0,1], PriceNode[1,1])
 }
 
 @disable(resize)
 @postCreate("info.scce.cinco.product.fp.pcconfig.hooks.mb.PostCreateMBNode")
 @preDelete("info.scce.cinco.product.fp.pcconfig.hooks.mb.PreDeleteMBNode")
 container MainboardNode {
-	style MainbordStyleMB ("Mainboard")
+	style bigGraySquareStyle("${mbprime.displayName}")
 	
 	@pvFileExtension("comp")
 	@pvLabel(name)
-	prime mbcomp.Mainboard as c
+	prime mbcomp.Mainboard as mbprime
 	
 	containableElements(
-		CPUNodeContainer[1,1], RAMNodeContainer[1,*], GPUNodeContainer[1,1]
+		CPUNodeContainer[1,1], RAMNodeContainer[1,*], GPUNodeContainer[1,*]
 	)
 	
 	incomingEdges(*[0,0])
@@ -33,18 +32,18 @@ container MainboardNode {
 container CPUNodeContainer {
 	style containerStyle("CPU")
 	
-	containableElements(CPUNode[1,1])
+	containableElements(CPUNode[0,1])
 	
 	incomingEdges(*[0,0])
 	outgoingEdges(*[0,0])
 }
 
 @disable(resize)
-//@postMove("")
+@postMove("info.scce.cinco.product.fp.pcconfig.hooks.mb.PostMoveCPUNode")
 @postCreate("info.scce.cinco.product.fp.pcconfig.hooks.mb.PostCreateCPUNode")
 @preDelete("info.scce.cinco.product.fp.pcconfig.hooks.mb.PreDeleteCPUNode")
 node CPUNode {
-	style psuStyle ("${cpuprime.displayName}")
+	style smallRedSquareStyle("${cpuprime.displayName}")
 	
 	@pvFileExtension("comp")
 	@pvLabel(name)
@@ -65,11 +64,11 @@ container RAMNodeContainer {
 }
 
 @disable(resize)
-//@postMove("info.scce.cinco.product.fp.pcconfig.hooks.mb.PostMoveRAMNode")
+@postMove("info.scce.cinco.product.fp.pcconfig.hooks.mb.PostMoveRAMNode")
 @postCreate("info.scce.cinco.product.fp.pcconfig.hooks.mb.PostCreateRAMNode")
 @preDelete("info.scce.cinco.product.fp.pcconfig.hooks.mb.PreDeleteRAMNode")
 node RAMNode {
-	style driveStyle ("${ramPrime.displayName}")
+	style greenBarStyle("${ramPrime.displayName}")
 	
 	@pvFileExtension("comp")
 	@pvLabel(name)
@@ -83,17 +82,17 @@ node RAMNode {
 container GPUNodeContainer {
 	style containerStyle("GPU")
 	
-	containableElements(GPUNode[1,1])
+	containableElements(GPUNode[0,1])
 	
 	incomingEdges(*[0,0])
 	outgoingEdges(*[0,0])
 }
 @disable(resize)
-//@postMove("")
+@postMove("info.scce.cinco.product.fp.pcconfig.hooks.mb.PostMoveGPUNode")
 @postCreate("info.scce.cinco.product.fp.pcconfig.hooks.mb.PostCreateGPUNode")
 @preDelete("info.scce.cinco.product.fp.pcconfig.hooks.mb.PreDeleteGPUNode")
 node GPUNode {
-	style containerStyle ("${GPUPrime.displayName}")
+	style blueRectangleStyle("${GPUPrime.displayName}")
 	
 	@pvFileExtension("comp")
 	@pvLabel(name)

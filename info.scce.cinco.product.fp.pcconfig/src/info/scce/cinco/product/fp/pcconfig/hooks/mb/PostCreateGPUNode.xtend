@@ -10,6 +10,7 @@ class PostCreateGPUNode extends CincoPostCreateHook<GPUNode>  {
 	override postCreate(GPUNode gpuN) {
 		gpuN.x=0
 		gpuN.y=0
+		
 		val gpuP = gpuN.GPUPrime as GPU
        	val priceNodeView = gpuN.container.container.container.findThe(PriceNode).priceNodeView
 		priceNodeView.price = Math.round((priceNodeView.price +  Double.parseDouble(gpuP.price)) * 100.0)/100.0

@@ -80,7 +80,7 @@ class Generator extends CincoRuntimeBaseClass implements IGenerator<PC> {
 			val mainboardPrime = mainboardMgl.findThe(MainboardNode)?.mbprime as Mainboard
 			val cpuPrime = mainboardMgl.findThe(CPUNode)?.cpuprime as CPU
 			val rams = mainboardMgl.find(RAMNode)
-			val gpu = mainboardMgl.findThe(GPUNode)?.GPUPrime as GPU
+			val gpus = mainboardMgl.find(GPUNode)
 			
 			var result = ''''''
 			
@@ -90,8 +90,10 @@ class Generator extends CincoRuntimeBaseClass implements IGenerator<PC> {
 			if(cpuPrime !== null){
 				result += handleRow(cpuPrime.displayName, cpuPrime.price)
 			}
-			if(gpu !== null){
-				result += handleRow(gpu.displayName, gpu.price)
+			
+			for(gpuNode : gpus) {
+				val gpuPrime = gpuNode.GPUPrime as GPU
+				result += handleRow(gpuPrime.displayName, gpuPrime.price)
 			}
 			for(ramNode : rams) {
 				val ramPrime = ramNode.ramPrime as RAM

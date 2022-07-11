@@ -6,26 +6,19 @@ import info.scce.cinco.fp.compdsl.componentDsl.CPU
 import info.scce.cinco.product.fp.pcconfig.mb.mgl.mainboard.PriceNode
 import info.scce.cinco.fp.compdsl.componentDsl.Mainboard
 
-class PostCreateCPUNode extends CincoPostCreateHook<CPUNode>
-{
+class PostCreateCPUNode extends CincoPostCreateHook<CPUNode> {
 	
-	override postCreate(CPUNode cpuN) 
-	{
-		// Ask if the cpu socket is right
-	if (!(cpuN.container.container.mbprime as Mainboard).socketType.name.equals((cpuN.cpuprime as CPU).socketType.name))
-       {
-       	cpuN.x=0;
-      	cpuN.y=0;
-       }
-       else
-       {
-       	cpuN.delete
-       }
-       System.out.println("") 
-       val cpuP = cpuN.cpuprime as CPU
-      // val priceNodeView = cpuN.container.container.container.priceNodes.get(0)
-       val priceNodeView = cpuN.container.container.container.findThe(PriceNode).priceNodeView
-		priceNodeView.price = Math.round((priceNodeView.price +  Double.parseDouble(cpuP.price)) * 100.0)/100.0 
+	override postCreate(CPUNode cpuN) {
+		if ((cpuN.container.container.mbprime as Mainboard).socketType.name.equals((cpuN.cpuprime as CPU).socketType.name)) {
+       		cpuN.x=0
+      		cpuN.y=0
+      		
+	    	val cpuP = cpuN.cpuprime as CPU
+	    	val priceNodeView = cpuN.container.container.container.findThe(PriceNode).priceNodeView
+			priceNodeView.price = Math.round((priceNodeView.price +  Double.parseDouble(cpuP.price)) * 100.0)/100.0 
+       	} else {
+       		cpuN.delete
+       	}
      }
 }
    

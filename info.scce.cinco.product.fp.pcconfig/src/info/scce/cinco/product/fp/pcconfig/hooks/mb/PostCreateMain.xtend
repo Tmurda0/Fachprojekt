@@ -9,5 +9,4 @@ class PostCreateMain extends CincoPostCreateHook<Mainboard> {
 		mb.newPriceNode(0,0)
 	}
 	
-	
 }

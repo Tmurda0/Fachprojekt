@@ -48,8 +48,10 @@ class PowerCheck extends PCCheck {
 						powerNeeded += cpu.power
 					}
 					
-					val gpu = mbPrime.findThe(GPUNode)?.GPUPrime as GPU
-					if(gpu !== null){
+					
+					val gpus = mbPrime.find(GPUNode)
+					for (gpuNode:gpus) {
+						val gpu = gpuNode.GPUPrime as GPU
 						powerNeeded += gpu.power
 					}
 					

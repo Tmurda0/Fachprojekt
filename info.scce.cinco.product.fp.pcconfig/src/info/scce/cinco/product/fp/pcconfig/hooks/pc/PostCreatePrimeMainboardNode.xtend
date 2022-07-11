@@ -22,12 +22,10 @@ class PostCreatePrimeMainboardNode extends CincoPostCreateHook<PrimeMainboardNod
 		val priceNodeView = mainboardNode.container.container.container.findThe(PriceNode).priceNodeView
 		val powerNode = mainboardNode.container.container.container.findThe(PowerNode)
 		val mainboardPrime = mainboardNode.mainboardPrime as Mainboard
-		
-		//TODO adjust to real price from price node
-		priceNodeView.price = Math.round((priceNodeView.price +  Double.parseDouble("100.11")) * 100.0)/100.0
-		
-		//TODO changes in mainboard.mgl do not cut through to the PC / Async values in preDelete - postCreate
 		val mb = mainboardPrime.findThe(MainboardNode)?.mbprime as info.scce.cinco.fp.compdsl.componentDsl.Mainboard
+		
+		priceNodeView.price = Math.round((priceNodeView.price +  mainboardPrime.findThe(info.scce.cinco.product.fp.pcconfig.mb.mgl.mainboard.PriceNode).price) * 100.0)/100.0
+		
 		if(mb !== null){
 			powerNode.power = powerNode.power - mb.power
 			
@@ -36,8 +34,9 @@ class PostCreatePrimeMainboardNode extends CincoPostCreateHook<PrimeMainboardNod
 				powerNode.power = powerNode.power - cpu.power
 			}
 			
-			val gpu = mainboardPrime.findThe(GPUNode)?.GPUPrime as GPU
-			if(gpu !== null){
+			val gpus = mainboardPrime.find(GPUNode)
+			for (gpuNode:gpus) {
+				val gpu = gpuNode.GPUPrime as GPU
 				powerNode.power = powerNode.power - gpu.power
 			}
 			

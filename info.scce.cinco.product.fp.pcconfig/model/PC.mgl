@@ -28,7 +28,7 @@ container PCNode {
 	
 	containableElements(
 		PrimeMainboardNodeContainer[1,1], 
-		DriveNodeContainer[0,*], PSUNodeContainer[1,1]
+		DriveNodeContainer[1,*], PSUNodeContainer[1,1]
 	)
 	
 	incomingEdges(*[0,0])
@@ -52,7 +52,7 @@ container PrimeMainboardNodeContainer {
 @postCreate("info.scce.cinco.product.fp.pcconfig.hooks.pc.PostCreatePrimeMainboardNode")
 @preDelete("info.scce.cinco.product.fp.pcconfig.hooks.pc.PreDeletePrimeMainboardNode")
 node PrimeMainboardNode {
-	style mainboardStyle
+	style smallRedSquareStyle("Mainboard")
 	
 	@pvFileExtension("mb")
 	prime mainboardMgl::Mainboard as mainboardPrime
@@ -77,7 +77,7 @@ container DriveNodeContainer {
 @postCreate("info.scce.cinco.product.fp.pcconfig.hooks.pc.PostCreateDriveNode")
 @preDelete("info.scce.cinco.product.fp.pcconfig.hooks.pc.PreDeleteDriveNode")
 node DriveNode {
-	style driveStyle("${drivePrime.displayName}")
+	style greenBarStyle("${drivePrime.displayName}")
 	
 	@pvFileExtension("comp")
 	@pvLabel(name)
@@ -103,7 +103,7 @@ container PSUNodeContainer {
 @postCreate("info.scce.cinco.product.fp.pcconfig.hooks.pc.PostCreatePSUNode")
 @preDelete("info.scce.cinco.product.fp.pcconfig.hooks.pc.PreDeletePSUNode")
 node PSUNode {
-	style psuStyle("${psuPrime.displayName}")
+	style blueRectangleStyle("${psuPrime.displayName}")
 	
 	@pvFileExtension("comp")
 	@pvLabel(name)
