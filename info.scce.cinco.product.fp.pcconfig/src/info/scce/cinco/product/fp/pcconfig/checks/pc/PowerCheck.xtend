@@ -7,6 +7,14 @@ import info.scce.cinco.fp.compdsl.componentDsl.Drive
 import info.scce.cinco.product.fp.pcconfig.pc.mgl.pc.PSUNode
 import info.scce.cinco.product.fp.pcconfig.pc.mgl.pc.DriveNode
 import info.scce.cinco.product.fp.pcconfig.pc.mgl.pc.PrimeMainboardNode
+import info.scce.cinco.product.fp.pcconfig.mb.mgl.mainboard.Mainboard
+import info.scce.cinco.product.fp.pcconfig.mb.mgl.mainboard.CPUNode
+import info.scce.cinco.fp.compdsl.componentDsl.CPU
+import info.scce.cinco.product.fp.pcconfig.mb.mgl.mainboard.GPUNode
+import info.scce.cinco.fp.compdsl.componentDsl.GPU
+import info.scce.cinco.product.fp.pcconfig.mb.mgl.mainboard.RAMNode
+import info.scce.cinco.fp.compdsl.componentDsl.RAM
+import info.scce.cinco.product.fp.pcconfig.mb.mgl.mainboard.MainboardNode
 
 class PowerCheck extends PCCheck {
 	/*
@@ -29,7 +37,28 @@ class PowerCheck extends PCCheck {
 			
 			val mainboardNode = model.findThe(PrimeMainboardNode)
 			if(mainboardNode != null){
-				powerNeeded += 150 //TODO add mainboard power
+				val mbPrime = mainboardNode.mainboardPrime as Mainboard
+				
+				val mb = mbPrime.findThe(MainboardNode)?.mbprime as info.scce.cinco.fp.compdsl.componentDsl.Mainboard
+				if(mb !== null){
+					powerNeeded += mb.power
+					
+					val cpu = mbPrime.findThe(CPUNode)?.cpuprime as CPU
+					if(cpu !== null){
+						powerNeeded += cpu.power
+					}
+					
+					val gpu = mbPrime.findThe(GPUNode)?.GPUPrime as GPU
+					if(gpu !== null){
+						powerNeeded += gpu.power
+					}
+					
+					val rams = mbPrime.find(RAMNode)
+					for (ramNode:rams) {
+						val ram = ramNode.ramPrime as RAM
+						powerNeeded += ram.power
+					}
+				}
 			}
 		}
 		

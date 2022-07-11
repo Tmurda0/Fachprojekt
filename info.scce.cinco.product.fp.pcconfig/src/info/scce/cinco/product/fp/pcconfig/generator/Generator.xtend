@@ -7,17 +7,20 @@ import info.scce.cinco.product.fp.pcconfig.pc.mgl.pc.PC
 import org.eclipse.core.runtime.IPath
 import de.jabc.cinco.meta.core.utils.EclipseFileUtils
 import info.scce.cinco.product.fp.pcconfig.pc.mgl.pc.PCNode
-import org.eclipse.emf.common.util.EList
-import info.scce.cinco.product.fp.pcconfig.pc.mgl.pc.PSUNodeContainer
 import info.scce.cinco.fp.compdsl.componentDsl.PSU
 import info.scce.cinco.fp.compdsl.componentDsl.Case
 import info.scce.cinco.product.fp.pcconfig.pc.mgl.pc.PrimeMainboardNode
 import info.scce.cinco.fp.compdsl.componentDsl.Mainboard
-import info.scce.cinco.product.fp.pcconfig.pc.mgl.pc.PrimeMainboardNodeContainer
-import info.scce.cinco.product.fp.pcconfig.pc.mgl.pc.DriveNodeContainer
 import info.scce.cinco.fp.compdsl.componentDsl.Drive
 import info.scce.cinco.product.fp.pcconfig.pc.mgl.pc.PSUNode
 import info.scce.cinco.product.fp.pcconfig.pc.mgl.pc.DriveNode
+import info.scce.cinco.product.fp.pcconfig.mb.mgl.mainboard.MainboardNode
+import info.scce.cinco.product.fp.pcconfig.mb.mgl.mainboard.CPUNode
+import info.scce.cinco.product.fp.pcconfig.mb.mgl.mainboard.RAMNode
+import info.scce.cinco.product.fp.pcconfig.mb.mgl.mainboard.GPUNode
+import info.scce.cinco.fp.compdsl.componentDsl.CPU
+import info.scce.cinco.fp.compdsl.componentDsl.GPU
+import info.scce.cinco.fp.compdsl.componentDsl.RAM
 
 class Generator extends CincoRuntimeBaseClass implements IGenerator<PC> {
 	
@@ -46,7 +49,7 @@ class Generator extends CincoRuntimeBaseClass implements IGenerator<PC> {
 			 <table>
 			        «caseRow(pc.PCcase as Case)»
 			        «psuRow(pc.findThe(PSUNode))»
-			        «mainboardRow(pc.findThe(PrimeMainboardNode))»
+			        «mainboardRows(pc.findThe(PrimeMainboardNode))»
 			        «FOR driveNode : pc.find(DriveNode)»
 			        	«driveRow(driveNode)»
 			        «ENDFOR»
@@ -61,28 +64,50 @@ class Generator extends CincoRuntimeBaseClass implements IGenerator<PC> {
 	
 	def caseRow(Case pcCase) {
 		if(pcCase !== null){
-			cost += Double.parseDouble(pcCase.price)
-			'''<tr><td>«pcCase.displayName»</td> <td>«pcCase.price» €</td></tr>'''
+			handleRow(pcCase.displayName, pcCase.price)
 		}
 	}
 	def psuRow(PSUNode psuNode) {
 		if(psuNode !== null){
 			val psuPrime = psuNode.psuPrime as PSU
-			cost += Double.parseDouble(psuPrime.price)
-			'''<tr><td>«psuPrime.displayName»</td> <td>«psuPrime.price» €</td></tr>'''
+			handleRow(psuPrime.displayName, psuPrime.price)
 		}
 	}
-	def mainboardRow(PrimeMainboardNode primeMainboardNode) { //TODO implement search for components inside the mainboard
+	def mainboardRows(PrimeMainboardNode primeMainboardNode) {
 		if(primeMainboardNode !== null){
-			val mainboardPrime = primeMainboardNode.mainboardPrime as info.scce.cinco.product.fp.pcconfig.mb.mgl.mainboard.Mainboard
-			cost += Double.parseDouble("100.11")
-			'''<tr><td>«"Mainboard"»</td> <td>«"100.11"» €</td></tr>'''
+			val mainboardMgl = primeMainboardNode.mainboardPrime as info.scce.cinco.product.fp.pcconfig.mb.mgl.mainboard.Mainboard
+			
+			val mainboardPrime = mainboardMgl.findThe(MainboardNode)?.mbprime as Mainboard
+			val cpuPrime = mainboardMgl.findThe(CPUNode)?.cpuprime as CPU
+			val rams = mainboardMgl.find(RAMNode)
+			val gpu = mainboardMgl.findThe(GPUNode)?.GPUPrime as GPU
+			
+			var result = ''''''
+			
+			if(mainboardPrime !== null){
+				result += handleRow(mainboardPrime.displayName, mainboardPrime.price)
+			}
+			if(cpuPrime !== null){
+				result += handleRow(cpuPrime.displayName, cpuPrime.price)
+			}
+			if(gpu !== null){
+				result += handleRow(gpu.displayName, gpu.price)
+			}
+			for(ramNode : rams) {
+				val ramPrime = ramNode.ramPrime as RAM
+				result += handleRow(ramPrime.displayName, ramPrime.price)
+			}
+			return result
 		}
 	}
 	def driveRow(DriveNode driveNode) {
 		val drive = driveNode.drivePrime as Drive
-		cost += Double.parseDouble(drive.price)
-		'''<tr><td>«drive.displayName»</td> <td>«drive.price» €</td></tr>'''
+		handleRow(drive.displayName, drive.price)
+	}
+	
+	def handleRow(String name, String price) {
+		cost += Double.parseDouble(price)
+		'''<tr><td>«name»</td> <td>«price» €</td></tr>'''
 	}
 	
 }
