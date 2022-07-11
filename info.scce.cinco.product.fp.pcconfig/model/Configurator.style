@@ -40,6 +40,17 @@ nodeStyle mainboardStyle {
 	}
 }
 
+nodeStyle MainbordStyleMB(1) {
+	rectangle {
+		appearance default
+		size (400,400)
+		text {
+			position (CENTER, MIDDLE)
+			value "%s"
+		}
+	}
+}
+
 nodeStyle driveStyle(1) {
 	rectangle {
 		appearance {
